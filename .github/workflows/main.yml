@@ -1,0 +1,29 @@
+
+name: Prepare BATTLE ROYALE BABRA
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "*.zip"
+      - ".github/workflows/main.yml"
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get game files
+        uses: actions/checkout@v4
+
+      - name: Extract game ZIP
+        run: |
+          mkdir extracted
+          unzip -q Battle_Royale_Babra_Online_OTP_Login_2.zip -d extracted
+          ls -R extracted
+
+      - name: Save extracted project
+        uses: actions/upload-artifact@v4
+        with:
+          name: Battle-Royale-Babra-Project
+          path: extracted/
+          
